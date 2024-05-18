@@ -163,27 +163,123 @@
 //   return value;
 // }
 
-function replacerFunction(key, value) {
-  if (typeof value === "object" && value !== null) {
-    let modifiedObject = {};
-    for (let prop in value) {
-      if (
-        typeof value[prop] === "object" &&
-        value[prop] !== null &&
-        value[prop].hasOwnProperty("name")
-      ) {
-        modifiedObject[prop] = {
-          ...value[prop], // Copy existing properties
-          name: "In " + value[prop].name, // Modify the 'name' property
-        };
-      } else {
-        modifiedObject[prop] = value[prop];
-      }
-    }
-    return modifiedObject;
+// function replacerFunction(key, value) {
+//   if (typeof value === "object" && value !== null) {
+//     let modifiedObject = {};
+//     for (let prop in value) {
+//       if (
+//         typeof value[prop] === "object" &&
+//         value[prop] !== null &&
+//         value[prop].hasOwnProperty("name")
+//       ) {
+//         modifiedObject[prop] = {
+//           ...value[prop], // Copy existing properties
+//           name: "In " + value[prop].name, // Modify the 'name' property
+//         };
+//       } else {
+//         modifiedObject[prop] = value[prop];
+//       }
+//     }
+//     return modifiedObject;
+//   }
+//   return value;
+// }
+
+// const strigigyValue = JSON.stringify(users, replacerFunction, 4);
+// console.log(strigigyValue);
+
+//3.create a function to Modify Object Values and Convert to JSON String
+
+// let users = [
+//   {
+//     name: "Abhi",
+//     isActive: true,
+//     numberOfSessionsAttended: 3,
+//     id: 121,
+//   },
+//   {
+//     name: "John",
+//     isActive: false,
+//     numberOfSessionsAttended: 5,
+//     id: 122,
+//   },
+//   {
+//     name: "Jane",
+//     isActive: true,
+//     numberOfSessionsAttended: 2,
+//     id: 123,
+//   },
+// ];
+
+// function replacerFunction(key, value) {
+//   if (Array.isArray(value)) {
+//     return value.filter(
+//       (item) => item.isActive && item.numberOfSessionsAttended
+//     );
+//   }
+//   return value;
+// }
+
+// const newStringValue = JSON.stringify(users, replacerFunction, 4);
+// console.log("newStringValue", newStringValue);
+
+const users = [
+  {
+    name: "Abhi",
+    isActive: true,
+    numberOfSessionsAttended: 3,
+    id: 121,
+  },
+  {
+    name: "John",
+    isActive: false,
+    numberOfSessionsAttended: 5,
+    id: 122,
+  },
+  {
+    name: "Jane",
+    isActive: true,
+    numberOfSessionsAttended: 2,
+    id: 123,
+  },
+];
+
+function deepCopy(value, seen = new WeakMap()) {
+  // Handle non-objects (primitives, functions, null)
+  if (typeof value !== "object" || value === null) {
+    return value;
   }
-  return value;
+
+  // Handle circular references
+  if (seen.has(value)) {
+    return seen.get(value);
+  }
+
+  // Create a copy for arrays
+  if (Array.isArray(value)) {
+    const copy = [];
+    seen.set(value, copy);
+    value.forEach((item, index) => {
+      copy[index] = deepCopy(item, seen);
+    });
+    return copy;
+  }
+
+  // Create a copy for objects
+  const copy = {};
+  seen.set(value, copy);
+  for (const key in value) {
+    if (Object.prototype.hasOwnProperty.call(value, key)) {
+      copy[key] = deepCopy(value[key], seen);
+    }
+  }
+
+  return copy;
 }
 
-const strigigyValue = JSON.stringify(users, replacerFunction, 4);
-console.log(strigigyValue);
+// const copiedUsers = deepCopy(users);
+let copiedUsers = users;
+copiedUsers[0].friend = users[1];
+
+console.log(copiedUsers);
+console.log(users);
