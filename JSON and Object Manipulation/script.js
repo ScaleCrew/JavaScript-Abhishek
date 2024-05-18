@@ -224,62 +224,63 @@
 // console.log("newStringValue", newStringValue);
 
 const users = [
-  {
-    name: "Abhi",
-    isActive: true,
-    numberOfSessionsAttended: 3,
-    id: 121,
-  },
-  {
-    name: "John",
-    isActive: false,
-    numberOfSessionsAttended: 5,
-    id: 122,
-  },
-  {
-    name: "Jane",
-    isActive: true,
-    numberOfSessionsAttended: 2,
-    id: 123,
-  },
-];
-
-function deepCopy(value, seen = new WeakMap()) {
-  // Handle non-objects (primitives, functions, null)
-  if (typeof value !== "object" || value === null) {
-    return value;
-  }
-
-  // Handle circular references
-  if (seen.has(value)) {
-    return seen.get(value);
-  }
-
-  // Create a copy for arrays
-  if (Array.isArray(value)) {
-    const copy = [];
+    {
+      name: "Abhi",
+      isActive: true,
+      numberOfSessionsAttended: 3,
+      id: 121,
+    },
+    {
+      name: "John",
+      isActive: false,
+      numberOfSessionsAttended: 5,
+      id: 122,
+    },
+    {
+      name: "Jane",
+      isActive: true,
+      numberOfSessionsAttended: 2,
+      id: 123,
+    },
+  ];
+  
+  function deepCopy(value, seen = new WeakMap()) {
+    // Handle non-objects (primitives, functions, null)
+    if (typeof value !== "object" || value === null) {
+      return value;
+    }
+  
+    // Handle circular references
+    if (seen.has(value)) {
+      return seen.get(value);
+    }
+  
+    // Create a copy for arrays
+    if (Array.isArray(value)) {
+      const copy = [];
+      seen.set(value, copy);
+      value.forEach((item, index) => {
+        copy[index] = deepCopy(item, seen);
+      });
+      return copy;
+    }
+  
+    // Create a copy for objects
+    const copy = {};
     seen.set(value, copy);
-    value.forEach((item, index) => {
-      copy[index] = deepCopy(item, seen);
-    });
+    for (const key in value) {
+      if (Object.prototype.hasOwnProperty.call(value, key)) {
+        copy[key] = deepCopy(value[key], seen);
+      }
+    }
+  
     return copy;
   }
-
-  // Create a copy for objects
-  const copy = {};
-  seen.set(value, copy);
-  for (const key in value) {
-    if (Object.prototype.hasOwnProperty.call(value, key)) {
-      copy[key] = deepCopy(value[key], seen);
-    }
-  }
-
-  return copy;
-}
-
-// const copiedUsers = deepCopy(users);
-let copiedUsers = users;
-copiedUsers[0].friend = users[1];
-
-console.log(copiedUsers);
-console.log(users);
+  
+  // const copiedUsers = deepCopy(users);
+  let copiedUsers = users;
+  copiedUsers[0].friend = users[1];
+  
+  console.log(copiedUsers);
+  console.log(users);
+  
