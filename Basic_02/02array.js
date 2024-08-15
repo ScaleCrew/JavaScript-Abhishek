@@ -103,3 +103,18 @@ console.log(newArray01.slice(-3, -1));
  * *array.at(array.length - 1)
  * array.slice(-1)
  */
+
+
+// Looping through an array
+let loppArray =["a","b","c","d","e","f","g","h","i","j"];
+
+// /traditional way
+// for(let i=0; i<loppArray.length; i++){
+//     console.log(loppArray[i]);
+    
+// }
+// using a for of
+for(alpha of  loppArray){
+    console.log(alpha);
+    
+}
