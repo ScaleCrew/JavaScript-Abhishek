@@ -9,9 +9,18 @@ console.log(String(number));
 // TYpe Coersion
 // When a operater encounters with different type of an value is try to do type coersion  in simple it mean it change the value automaticallly
 //ex
-console.log("23" -"20");
-console.log(null >0);
-console.log(null >=0);
+// console.log("23" -"20");
+// console.log(null >0);
+// console.log(null >=0);
+
+let nameString="AAbhi";
+let secondArray = "AAbhi"
+let frequencyString={}
+
+console.log(frequencyString);
+
+
+
 
 
 
