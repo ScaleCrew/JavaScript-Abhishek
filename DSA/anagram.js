@@ -28,3 +28,17 @@ function checkAngram(str1, str2) {
 
 let res = checkAngram("AAhi", "Abhi");
 console.log(res);
+
+// let label=["High", "Low", "Medium"]
+let label = "Low";
+switch (label) {
+  case "High":
+    console.log("High");
+  case "Low":
+    console.log("Low");
+  case "Medium":
+    console.log("Medium");
+    break
+  default:
+    console.log("Medium");
+}
