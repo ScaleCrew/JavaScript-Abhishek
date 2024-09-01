@@ -38,7 +38,11 @@ switch (label) {
     console.log("Low");
   case "Medium":
     console.log("Medium");
-    break
+    break;
   default:
     console.log("Medium");
 }
+
+console.log("New Line");
+let emptyArray = [];
+emptyArray.find((items) => console.log(items));
