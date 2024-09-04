@@ -1,5 +1,5 @@
 //This
-"use strict";
+// "use strict";
 /**
  * ! instic mode the the function in the GEC has this as undefine hence any function inside the functio is as print the value of the this as undefine
  * ! in any function associated to any obj inside the obj is as print the value of the this as the undefine and in case of arrow and IIFE this is point to the obj in  which  the function is trigger
@@ -76,50 +76,61 @@
 // };
 // person.printFunction();
 
-console.log(this);
+// console.log(this);
 
-function printFunction() {
-  console.log(this);
+// function printFunction() {
+//   console.log(this);
 
-  const newExpressions = function () {
-    console.log("expresion", this);
-  };
+//   const newExpressions = function () {
+//     console.log("expresion", this);
+//   };
 
-  const arrowFunction = () => {
-    console.log("arrow function", this);
-  };
-  const functionDeclaration = function () {
-    console.log("function declaration", this);
-  };
-  newExpressions();
-  arrowFunction();
-  functionDeclaration();
-}
+//   const arrowFunction = () => {
+//     console.log("arrow function", this);
+//   };
+//   const functionDeclaration = function () {
+//     console.log("function declaration", this);
+//   };
+//   newExpressions();
+//   arrowFunction();
+//   functionDeclaration();
+// }
 
-printFunction(); //Window object
+// printFunction(); //Window object
 
-const obj = {
-  name: "Abhishek",
-  printFunction: function () {
-    console.log("name inside the object", this.name);
-    console.log("this inside the object", this);
+// const obj = {
+//   name: "Abhishek",
+//   printFunction: function () {
+//     console.log("name inside the object", this.name);
+//     console.log("this inside the object", this);
 
-    function randomFunction() {
-      console.log("this inside the randomFunction", this);
-    }
-    const randomFunctionArrow = () => {
-      console.log("this inside the randomFunctionArrow", this);
-    };
-    const randomFunctionExpression = function () {
-      console.log("this inside the randomFunctionExpression", this);
-    };
-    (() => {
-      console.log("this inside the IIFE", this);
-    })();
+//     function randomFunction() {
+//       console.log("this inside the randomFunction", this);
+//     }
+//     const randomFunctionArrow = () => {
+//       console.log("this inside the randomFunctionArrow", this);
+//     };
+//     const randomFunctionExpression = function () {
+//       console.log("this inside the randomFunctionExpression", this);
+//     };
+//     (() => {
+//       console.log("this inside the IIFE", this);
+//     })();
 
-    randomFunction();
-    randomFunctionArrow();
-    randomFunctionExpression();
-  },
-};
-obj.printFunction();
+//     randomFunction();
+//     randomFunctionArrow();
+//     randomFunctionExpression();
+//   },
+// };
+// obj.printFunction();
+
+// const randomArrowFunction = () => {
+//   console.log(this);
+//   const insideArrowFunction = () => {
+//     console.log(this);
+//   };
+
+//   insideArrowFunction();
+// };
+
+// randomArrowFunction();
